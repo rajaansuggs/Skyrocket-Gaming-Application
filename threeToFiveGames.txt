@@ -1,0 +1,7 @@
+id	gameName	gameDescription	gameRating
+1	Clash Royale	Clash Royale allows for matchups between honorable foe with a diverse deck, three towers and increasingly challenging arenas.	0.86
+2	Sims 89	The Sims 89 enables players to create entire families, build their dream homes, open businesses and live out just about any other real-life experience within the fictional Sims universe.	0.70
+3	Mario Kart	24 new tracks are set for Mario and his friends to become the race car super star.	0.59
+4	Uncles Ice Creameria	Uncle needs an extra employee to manage his precious ice creams and thick, creamy smoothies.	0.60
+5	Brawl Stars	A 3V3 battle of shooting and punching the opposing team to conquer the soccer match.	0.55  
+6	Mortal Kombat	A solo battle of customizable and ruthless characters that'll stop at nothing to finish the opponent in a gruesome matchup.	0.89
