@@ -24,7 +24,6 @@ public class Tester {
 			scanner= new Scanner(new File("threeToFiveGames.txt"));
 			scanner.nextLine();
 			while(scanner.hasNextLine()) {
-				//System.out.println(scanner.nextLine());
 				Game game = new Game(scanner);
 				games.add(game);
 			}
