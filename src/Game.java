@@ -29,7 +29,7 @@ public class Game {
 		return "Games gameId=" + gameId + ", gameName=" + gameName + ", gameDescription=" + gameDescription
 				+ ", averageRating=" + averageRating;
 	}
-
+	
 	//======================Getters/Setters
 	public int getGameId() {
 		return gameId;
@@ -62,6 +62,7 @@ public class Game {
 	public void setAverageRating(double averageRating) {
 		this.averageRating = averageRating;
 	}
-		
+	
+	
 
 }
