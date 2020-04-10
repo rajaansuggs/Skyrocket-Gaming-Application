@@ -3,8 +3,7 @@ import java.util.Scanner;
 public class Game {
 	//======================Instance Variables
 	private int gameId;
-	private String gameName;
-	private String gameDescription;
+	private String gameName, gameDescription, hyperlink;
 	private double averageRating;
 	
 	//======================Constructors
@@ -13,21 +12,24 @@ public class Game {
 	}
 	
 	public Game(String[] games) {
-		this(Integer.parseInt(games[0]), games[1], games[2], Double.parseDouble(games[3]));
+		this(Integer.parseInt(games[0]), games[1], games[2], Double.parseDouble(games[3]), games[4]);
 		
 	}
 	
-	public Game(int gameId, String gameName, String gameDescription, double averageRating) {
+	public Game(int gameId, String gameName, String gameDescription, double averageRating, String hyperlink) {
 		setGameId(gameId);
 		setGameName(gameName);
 		setGameDescription(gameDescription);
 		setAverageRating(averageRating);
+		setGameHyperLink(hyperlink);
 	}
+
+
 	//======================Methods
 	@Override
 	public String toString() {
 		return "Games gameId=" + gameId + ", gameName=" + gameName + ", gameDescription=" + gameDescription
-				+ ", averageRating=" + averageRating;
+				+ ", averageRating=" + averageRating + ", hyperlink=" + hyperlink;
 	}
 	
 	//======================Getters/Setters
@@ -63,6 +65,13 @@ public class Game {
 		this.averageRating = averageRating;
 	}
 	
+	public String getGameHyperLink() {
+		return hyperlink;
+	}
+	
+	public void setGameHyperLink(String hyperlink) {
+		this.hyperlink = hyperlink;
+	}
 	
 
 }
