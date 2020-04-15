@@ -50,7 +50,7 @@ public class loginGUI extends JFrame{
 		panel.setLayout(new GridBagLayout());
 		String s = "Description: "+ g.getGameDescription()+ "    ";
 		JLabel descLabel = new JLabel(s);
-		String rate = "Rating: " + g.getAvgRating() + "    ";
+		String rate = "Rating: " + g.getStarRating() + "/5 Stars    ";
 		JLabel rateLabel = new JLabel(rate);
 		String url = g.getGameHyperLink();
 		JLabel linkLabel = new JLabel(url);
