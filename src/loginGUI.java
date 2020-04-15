@@ -50,6 +50,8 @@ public class loginGUI extends JFrame{
 		panel.setLayout(new GridBagLayout());
 		String s = "Description: "+ g.getGameDescription()+ "    ";
 		JLabel descLabel = new JLabel(s);
+		String rate = "Rating: " + g.getAvgRating() + "    ";
+		JLabel rateLabel = new JLabel(rate);
 		String url = g.getGameHyperLink();
 		JLabel linkLabel = new JLabel(url);
 		linkLabel.setForeground(Color.BLUE);
@@ -76,6 +78,7 @@ public class loginGUI extends JFrame{
  
 		});
 		panel.add(descLabel);
+		panel.add(rateLabel);
 		panel.add(linkLabel);
         	panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		this.add(panel);
