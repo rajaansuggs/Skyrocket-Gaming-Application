@@ -32,11 +32,11 @@ public class Game {
 				+ ", averageRating=" + rating.getAvgRating() + ", hyperlink=" + hyperlink;
 	}
 	
-	//Value will be truncated to 2 decimal places
-	public double getAvgRating() {
+	//Value will be truncated to 2 decimal places, then set out of 5 stars
+	public double getStarRating() {
 		double value = rating.getAvgRating();
 		double rounded = (Math.round(value * 100.0))/100.0;
-		return rounded;
+		return rounded * 5;
 	}
 	
 	//======================Getters/Setters
