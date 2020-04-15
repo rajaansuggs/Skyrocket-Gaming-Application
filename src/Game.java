@@ -35,8 +35,8 @@ public class Game {
 	//Value will be truncated to 2 decimal places, then set out of 5 stars
 	public double getStarRating() {
 		double value = rating.getAvgRating();
-		double rounded = (Math.round(value * 100.0))/100.0;
-		return rounded * 5;
+		double rounded = (Math.round(value * 10.0))/2.0;
+		return rounded;
 	}
 	
 	//======================Getters/Setters
