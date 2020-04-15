@@ -4,7 +4,7 @@ public class Game {
 	//======================Instance Variables
 	private int gameId;
 	private String gameName, gameDescription, hyperlink;
-	private double averageRating;
+	private GameRating rating;
 	
 	//======================Constructors
 	public Game(Scanner scanner) {
@@ -20,7 +20,7 @@ public class Game {
 		setGameId(gameId);
 		setGameName(gameName);
 		setGameDescription(gameDescription);
-		setAverageRating(averageRating);
+		setRating(new GameRating(gameId));
 		setGameHyperLink(hyperlink);
 	}
 
@@ -29,7 +29,14 @@ public class Game {
 	@Override
 	public String toString() {
 		return "Games gameId=" + gameId + ", gameName=" + gameName + ", gameDescription=" + gameDescription
-				+ ", averageRating=" + averageRating + ", hyperlink=" + hyperlink;
+				+ ", averageRating=" + rating.getAvgRating() + ", hyperlink=" + hyperlink;
+	}
+	
+	//Value will be truncated to 2 decimal places
+	public double getAvgRating() {
+		double value = rating.getAvgRating();
+		double rounded = (Math.round(value * 100.0))/100.0;
+		return rounded;
 	}
 	
 	//======================Getters/Setters
@@ -57,12 +64,12 @@ public class Game {
 		this.gameDescription = gameDescription;
 	}
 
-	public double getAverageRating() {
-		return averageRating;
+	public GameRating getRating() {
+		return rating;
 	}
 
-	public void setAverageRating(double averageRating) {
-		this.averageRating = averageRating;
+	public void setRating(GameRating rating) {
+		this.rating = rating;
 	}
 	
 	public String getGameHyperLink() {
