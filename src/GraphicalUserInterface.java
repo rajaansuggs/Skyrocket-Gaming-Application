@@ -139,8 +139,8 @@ public class GraphicalUserInterface{
 		window.setVisible(true);	
 
 	}
-	//====================================Private helper for sorting
-	private ArrayList<String> sortAlphabetically(ArrayList<Game> games) {
+	//====================================Public helper for sorting
+	public static ArrayList<String> sortAlphabetically(ArrayList<Game> games) {
 		ArrayList <String> sortedGames = new ArrayList<String>();
 		for (int i = 0; i < games.size(); i++) {
 			sortedGames.add(games.get(i).getGameName());
