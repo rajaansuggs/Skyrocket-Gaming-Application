@@ -11,8 +11,8 @@
     <property name="source" value="1.8"/>
 	<!--Next two are mine-->
 	<property name="source.dir" location="src"/>
-	<property name="javadoc.dir" location="javadoc"/>
-		
+	<property name="doc.dir" location="javadoc"/>
+
 	<path id="Skyrocket-Catalog-Application.classpath">
         <pathelement location="."/>
     </path>
@@ -40,7 +40,7 @@
 		
 	<target depends="clean,build,test" name="javadoc"> <!--Auto-generates Javadoc-->
 		<echo message="Javadoc"/>
-		<javadoc sourcepath="${source.dir}" destdir="${doc.dir}"/>
+		<javadoc sourcefiles="src/Tester.java" destdir="${doc.dir}"/>
 	</target>
 		
     <target depends="build-subprojects,build-project,clean" name="build"/> <!--Must run build-subprojects/projects to complete build-->
