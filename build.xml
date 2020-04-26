@@ -17,7 +17,7 @@
         <pathelement location="."/>
     </path>
 		
-	<target name="all" depends="javadoc,build,test">
+	<target name="all" depends="javadoc,build,test,run">
 		<echo message="all"/>
 	</target>
 		
@@ -55,11 +55,30 @@
         </javac>
     	<echo message="Compiled and debugged"/>
     </target>
+	
     <target name="test" depends="build">
     	<echo message="test"/>
         <java classname="Tester" failonerror="true" fork="yes">
             <classpath refid="Skyrocket-Catalog-Application.classpath"/>
         </java>
+    </target>
+	
+	<target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes"/>
+    </target>	
+		
+	<target name="jar" depends="javadoc,compile">
+        <mkdir dir="build/jar"/>
+        <jar destfile="build/jar/OxfordGamez.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="Tester"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run" depends="jar">
+        <java jar="build/jar/OxfordGamez.jar" fork="true"/>
     </target>
 	
 	<!--To run application - https://ant.apache.org/manual/tutorial-HelloWorldWithAnt.html#four-steps-->
