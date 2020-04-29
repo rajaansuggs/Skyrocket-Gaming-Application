@@ -110,6 +110,9 @@ public class User {
 			comment.setVisible(true);
 		}
 		
+		/*public void addGame() {
+			
+		}*/
 		//========================Getters/Setters
 		public int getUserId() 
 		{
@@ -190,5 +193,5 @@ public class User {
 			}
 			return isActive;
 		}
-		
+	
 }
