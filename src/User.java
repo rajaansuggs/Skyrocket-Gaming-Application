@@ -2,14 +2,21 @@
 
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 /**
  * @author rajaansuggs
@@ -25,7 +32,7 @@ public class User {
 		private ArrayList<Game> games = new ArrayList<Game>();
 		private boolean isFlagged;
 		private boolean isActive;
-		
+		private HashMap<Comment, Game> commentForAGame = new HashMap<Comment, Game>();		
 		private JFrame userPage;
 		private JLabel label;
 		private JPanel panel;
@@ -51,9 +58,6 @@ public class User {
 	
 	
 		}
-		public User() {
-			System.out.println("New Potential User");
-		}
 
 		//========================Methods
 		public void save(RandomAccessFile raf) throws Exception {
@@ -65,22 +69,10 @@ public class User {
 	
 		}
 		
-		public void displayPage()
-		{
-			userPage = new JFrame(getFirstName() + " " + getLastName() + "'s Sky Rocket");
-			label = new JLabel("Sky Rocket");
-			label.setFont(new Font("Times New Roman", Font.PLAIN + Font.ITALIC, 38));
-			panel = new JPanel();
-			label.setBounds(600, 50, 30, 40);
-			userPage.add(label);
-			userPage.setMinimumSize(new Dimension(1200,900));
-			userPage.pack();
-			userPage.setVisible(true);
-		}
-		
-		
+
 		@Override
-		public int hashCode() {
+		public int hashCode() 
+		{
 			final int prime = 31;
 			int result = 1;
 			result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -89,7 +81,8 @@ public class User {
 		}
 
 		@Override
-		public boolean equals(Object obj) {
+		public boolean equals(Object obj) 
+		{
 			if (this == obj)
 				return true;
 			if (!(obj instanceof User))
@@ -107,55 +100,76 @@ public class User {
 				return false;
 			return true;
 		}
-
+		
+		
+		public void addComment(Game g)
+		{
+			JTextArea comment = new JTextArea();
+			comment.setMaximumSize(new Dimension(300, 300));
+			comment.getText();
+			comment.setVisible(true);
+		}
+		
 		//========================Getters/Setters
-		public int getUserId() {
+		public int getUserId() 
+		{
 			return this.userId;
 		}
 		
-		public void setUserId(int userId) {
+		public void setUserId(int userId) 
+		{
 			this.userId = userId;
 		}
 		
-		public String getLastName() {
+		public String getLastName() 
+		{
 			return this.lastName;
 		}
 		
-		public void setLastName(String lastName) {
+		public void setLastName(String lastName) 
+		{
 			this.lastName = lastName;
 		}
 		
-		public String getFirstName() {
+		public String getFirstName() 
+		{
 			return this.firstName;
 		}
 		
-		public void setFirstName(String firstName) {
+		public void setFirstName(String firstName) 
+		{
 			this.firstName = firstName;
 		}
 		
-		public String getUserPassword() {
+		public String getUserPassword() 
+		{
 			return this.password;
 		}
 		
-		public void setUserPassword(String password) {
+		public void setUserPassword(String password) 
+		{
 			this.password = password;		
 		}
 		
-		public String getUserName() {
+		public String getUserName() 
+		{
 			return userName;
 		}
 		
-		public void setUserName(String userName) {
+		public void setUserName(String userName) 
+		{
 			this.userName = userName;
 		}
 	
 		@Override
-		public String toString() {
+		public String toString() 
+		{
 			return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", userName="
 					+ userName + ", password=" + password + ", games=" + games + ", isFlagged=" + isFlagged + "]";
 		}
 		
-		public boolean canLogin(String userName, String password, ArrayList<Game> games) {
+		public boolean canLogin(String userName, String password, ArrayList<Game> games)
+{
 			try {
 				isActive =false;
 				Scanner sc =null;
