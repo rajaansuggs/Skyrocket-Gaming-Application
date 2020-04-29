@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 public class GraphicalUserInterface{
 	private JLabel label;
@@ -31,7 +33,7 @@ public class GraphicalUserInterface{
 		signupButton = new JLabel(signupIcon); //Label's use addMouseListeners while JButton's addActionLAISTENER
 		signupButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent m) {
-				new loginGUI(true, "Sign up", false);
+				new loginGUI(true, true, false, games);
 			}
 		});
 		//====================================Login Page
@@ -39,7 +41,7 @@ public class GraphicalUserInterface{
 		loginButton = new JLabel(loginIcon); //Label's use addMouseListeners while JButton's addActionListener
 		loginButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent m) {
-				new loginGUI(true, "Login", false);
+				new loginGUI(false, true, false, games);
 			}
 		});
 		window.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -64,7 +66,7 @@ public class GraphicalUserInterface{
 				for(int i=0; i<sortedGameNames.size(); i++) {
 					aString += sortedGameNames.get(i) +"          ";
 				}
-				new loginGUI(false, aString, false);
+				new loginGUI(aString);
 			}
 		});	
 		topPanel.add(sort);	
@@ -122,15 +124,101 @@ public class GraphicalUserInterface{
 				new loginGUI(games.get(5));
 			}
 		});
+		
 		southPanel.add(jl5);
+		southPanel.setLayout(new BoxLayout(southPanel, 1));
 		
 		//setLayout(new FlowLayout());
 		//====================================Add everything to a top, center and bottom inner panels then Used a Border Layout in layered panels
-		JPanel borderPnl = new JPanel(new BorderLayout());
+		JPanel borderPnl = new JPanel(new BorderLayout(11,11));
 		borderPnl.add(topPanel, BorderLayout.NORTH);
 		borderPnl.add(centralPanel, BorderLayout.CENTER);
-		borderPnl.add(southPanel, BorderLayout.SOUTH);
+		
+		
+		
+		//======================Search Bar
+				JLabel searchLabel = new JLabel();
+				JTextField searchBar = new JTextField();
+				JButton searchButton = new JButton("Search");
+				searchButton.addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent m) {
+						southPanel.setLayout(new BoxLayout(southPanel, 1));
+						if(searchBar.getText().equalsIgnoreCase("Brawl Stars")){
+							JLabel name = new JLabel("\n"+games.get(4).getGameName());
+							JLabel desc = new JLabel("Description: "+games.get(4).getGameDescription());
+							JLabel rate = new JLabel("Rating: "+games.get(4).getStarRating());
+							JLabel company = new JLabel("Company: "+games.get(4).getCompany());
+							JLabel version = new JLabel("Version: "+games.get(4).getVersionNumber());
+							JLabel compatib = new JLabel("Compatibility Systems: "+games.get(4).getCompatibleSystem());
+							addLabelToWindow(name, desc, rate, company,version, compatib);
+						}
+						else if(searchBar.getText().equalsIgnoreCase("Sims 89")){
+							JLabel name = new JLabel("\n"+games.get(1).getGameName());
+							JLabel desc = new JLabel("Description: "+games.get(1).getGameDescription());
+							JLabel rate = new JLabel("Rating: "+games.get(1).getStarRating());
+							JLabel company = new JLabel("Company: "+games.get(1).getCompany());
+							JLabel version = new JLabel("Version: "+games.get(1).getVersionNumber());
+							JLabel compatib = new JLabel("Compatibility Systems: "+games.get(1).getCompatibleSystem());
+							addLabelToWindow(name, desc, rate, company,version, compatib);
+						}
+						else if(searchBar.getText().equalsIgnoreCase("Mario Kart")){
+							JLabel name = new JLabel("\n"+games.get(2).getGameName());
+							JLabel desc = new JLabel("Description: "+games.get(2).getGameDescription());
+							JLabel rate = new JLabel("Rating: "+games.get(2).getStarRating());
+							JLabel company = new JLabel("Company: "+games.get(2).getCompany());
+							JLabel version = new JLabel("Version: "+games.get(2).getVersionNumber());
+							JLabel compatib = new JLabel("Compatibility Systems: "+games.get(2).getCompatibleSystem());
+							addLabelToWindow(name, desc, rate, company,version, compatib);
+							
+						}
+						else if(searchBar.getText().equalsIgnoreCase("Uncles Ice Creameria")){
+							JLabel name = new JLabel("\n"+games.get(3).getGameName());
+							JLabel desc = new JLabel("Description: "+games.get(3).getGameDescription());
+							JLabel rate = new JLabel("Rating: "+games.get(3).getStarRating());
+							JLabel company = new JLabel("Company: "+games.get(3).getCompany());
+							JLabel version = new JLabel("Version: "+games.get(3).getVersionNumber());
+							JLabel compatib = new JLabel("Compatibility Systems: "+games.get(3).getCompatibleSystem());
+							addLabelToWindow(name, desc, rate, company,version, compatib);
+						}
+						else if(searchBar.getText().equalsIgnoreCase("Mortal Kombat")){
+							JLabel name = new JLabel("\n"+games.get(5).getGameName());
+							JLabel desc = new JLabel("Description: "+games.get(5).getGameDescription());
+							JLabel rate = new JLabel("Rating: "+games.get(5).getStarRating());
+							JLabel company = new JLabel("Company: "+games.get(5).getCompany());
+							JLabel version = new JLabel("Version: "+games.get(5).getVersionNumber());
+							JLabel compatib = new JLabel("Compatibility Systems: "+games.get(5).getCompatibleSystem());
+							addLabelToWindow(name, desc, rate, company,version, compatib);
+						}
+						else if(searchBar.getText().equalsIgnoreCase("Clash Royale")){
+							JLabel name = new JLabel("\n"+games.get(0).getGameName());
+							JLabel desc = new JLabel("Description: "+games.get(0).getGameDescription());
+							JLabel rate = new JLabel("Rating: "+games.get(0).getStarRating());
+							JLabel company = new JLabel("Company: "+games.get(0).getCompany());
+							JLabel version = new JLabel("Version: "+games.get(0).getVersionNumber());
+							JLabel compatib = new JLabel("Compatibility Systems: "+games.get(0).getCompatibleSystem());
+							addLabelToWindow(name, desc, rate, company,version, compatib);;
+						}
+					}
 
+					private void addLabelToWindow(JLabel name, JLabel desc, JLabel rate, JLabel co, JLabel versionNo, JLabel compatib) {	
+						name.setFont(new Font("Serif", Font.PLAIN + Font.BOLD, 18));						
+						southPanel.add(name);
+						southPanel.add(desc);
+						southPanel.add(rate);
+						southPanel.add(co);
+						southPanel.add(versionNo);
+						southPanel.add(compatib);
+						window.setVisible(true);
+					}
+				});
+				
+		southPanel.add(searchBar);
+		southPanel.add(searchLabel);
+		southPanel.add(searchButton);
+		borderPnl.add(southPanel, BorderLayout.SOUTH);
+		//borderPnl.setBorder((Border) new BorderLayout());
+		//borderPnl.add(searchLabel, BorderLayout.EAST);
+		//borderPnl.add(searchBar, BorderLayout.EAST);
 		//====================================Add to the window/JFrame
 		window.add(borderPnl);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -151,3 +239,4 @@ public class GraphicalUserInterface{
 	}
 	
 }
+
