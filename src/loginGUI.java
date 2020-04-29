@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 import javax.swing.BorderFactory;
@@ -24,8 +25,10 @@ import javax.swing.JTextField;
 @SuppressWarnings("serial")
 public class loginGUI extends JFrame implements Serializable{
 	private static HashSet<User> users = new HashSet<User>();
+	private HashMap <User, UserPage> usersAndUserPage = new HashMap<User, UserPage>();
 	JLabel jlabel;
 	JButton s;
+	boolean canLogin;
 	//====================================Login/Sign up
 	public loginGUI(boolean isSignup, boolean isLoginCapabilities, boolean isLinked, ArrayList<Game> games) 
 	{
@@ -70,7 +73,8 @@ public class loginGUI extends JFrame implements Serializable{
 							if((userNameTextField.getText()).equals(parts[3]) && (passwordTextField.getText()).equals(parts[4]))
 							{
 								users.add((new User(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4], games)));
-								(new User(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4], games)).displayPage();
+								usersAndUserPage.get((new User(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4], games))).displayPage();
+							
 							}
 						}
 						sc.close();
@@ -106,6 +110,7 @@ public class loginGUI extends JFrame implements Serializable{
 			
 			
 		}
+
 		if(isSignup == true && isLoginCapabilities == true && isLinked == false) {
 			this.setMinimumSize(new Dimension(1500,700));
 			this.getContentPane().setLayout(null);
@@ -150,7 +155,6 @@ public class loginGUI extends JFrame implements Serializable{
 			lastnameTextField.setBounds(155, 95, 389, 20);
 			this.getContentPane().add(lastnameTextField);
 			
-			User u = new User();
 			
 			signupButton.addMouseListener(new MouseAdapter() 
 			{
@@ -159,6 +163,7 @@ public class loginGUI extends JFrame implements Serializable{
 					Scanner sc =null;
 					try 
 					{
+						canLogin = true;
 						sc = new Scanner(new File("userDatabaseFile.txt"));
 						while(sc.hasNextLine())
 						{
@@ -172,6 +177,7 @@ public class loginGUI extends JFrame implements Serializable{
 									JLabel label = new JLabel("Username field is required");
 									alert.add(label);
 									alert.setVisible(true);
+									canLogin = false;
 									break;
 								}
 								if(passwordTextField.getText().isEmpty()) 
@@ -182,6 +188,7 @@ public class loginGUI extends JFrame implements Serializable{
 									JLabel label = new JLabel("Password field is required");
 									alert.add(label);
 									alert.setVisible(true);
+									canLogin = false;
 									break;
 								}
 								if(firstnameTextField.getText().isEmpty()) 
@@ -192,6 +199,8 @@ public class loginGUI extends JFrame implements Serializable{
 									JLabel label = new JLabel("First Name field is required");
 									alert.add(label);
 									alert.setVisible(true);
+									canLogin = false;
+									break;
 								}
 								if(lastnameTextField.getText().isEmpty()) 
 								{
@@ -201,18 +210,31 @@ public class loginGUI extends JFrame implements Serializable{
 									JLabel label = new JLabel("Last Name field is required");
 									alert.add(label);
 									alert.setVisible(true);
+									canLogin = false;
+									break;
 								}
 								
 								else {
-									int randomInt = (int)(Math.random()*2147483646);
-									UsersCard uc = new UsersCard(randomInt, firstnameTextField.getText(), lastnameTextField.getText(), userNameTextField.getText(), passwordTextField.getText());
-									User uOfficial = new User(randomInt, firstnameTextField.getText(), lastnameTextField.getText(), userNameTextField.getText(), passwordTextField.getText(), games);
-									uOfficial.displayPage();
-									users.add(uOfficial);
-									break;
+									if(userNameTextField.getText().equals(parts[3])) {
+										JFrame alert = new JFrame();
+										alert.setMaximumSize(new Dimension(300, 300));
+										alert.setBounds(350, 350, 200, 150);
+										JLabel label = new JLabel("Username is taken");
+										alert.add(label);
+										alert.setVisible(true);
+										canLogin = false;
+										break;
+									}
 								}
-							
-							
+						}
+						if(canLogin) {
+							int randomInt = (int)(Math.random()*2147483646);
+							UsersCard uc = new UsersCard(randomInt, firstnameTextField.getText(), lastnameTextField.getText(), userNameTextField.getText(), passwordTextField.getText());
+							User uOfficial = new User(randomInt, firstnameTextField.getText(), lastnameTextField.getText(), userNameTextField.getText(), passwordTextField.getText(), games);
+							UserPage up = new UserPage(uOfficial);
+							up.displayPage();
+							users.add(uOfficial);
+							usersAndUserPage.put(uOfficial, up);
 						}
 						
 					}
@@ -227,18 +249,7 @@ public class loginGUI extends JFrame implements Serializable{
 			
 		}
 			
-			//========================Login Button and Functionality: Verifies username and password
-			
-						
-		
-		/*else if(isLoginCapabilities == false && isLinked == false){
-			this.setMinimumSize(new Dimension(800,400));
-			JPanel p = new JPanel();
-			p.setLayout(new BoxLayout(p, 0));
-			jlabel = new JLabel(name);
-			jlabel.setFont(new Font("Times New Roman", Font.PLAIN, 24));
-			this.add(jlabel);
-			*/
+
 		
 		this.setTitle("Sky Rocket");
 		this.pack();
@@ -292,4 +303,15 @@ public class loginGUI extends JFrame implements Serializable{
 	}
 
 
+	public loginGUI(String aString) {
+		JLabel sortGUI = new JLabel(aString);
+		sortGUI.setMinimumSize(new Dimension(250, 250));
+		this.setMinimumSize(new Dimension(400,400)); 
+		this.add(sortGUI);
+		this.pack();
+		this.setVisible(true);
+	}
+
+
 }
+
