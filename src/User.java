@@ -1,22 +1,11 @@
 
 
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 /**
  * @author rajaansuggs
@@ -32,10 +21,6 @@ public class User {
 		private ArrayList<Game> games = new ArrayList<Game>();
 		private boolean isFlagged;
 		private boolean isActive;
-		private HashMap<Comment, Game> commentForAGame = new HashMap<Comment, Game>();		
-		private JFrame userPage;
-		private JLabel label;
-		private JPanel panel;
 		//=======================constructors
 		//=======================Sign In Constructor (sets all values to create User)
 		public User(int userId, String firstName, String lastName, String userName, String password, ArrayList<Game> allOfTheGames) {
@@ -114,6 +99,9 @@ public class User {
 			
 		}*/
 		//========================Getters/Setters
+		public ArrayList<Game> getGameList(){
+			return games;	
+		}
 		public int getUserId() 
 		{
 			return this.userId;
@@ -193,5 +181,5 @@ public class User {
 			}
 			return isActive;
 		}
-	
+		
 }
