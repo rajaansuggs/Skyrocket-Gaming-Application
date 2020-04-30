@@ -1,33 +1,137 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
-
+import java.util.HashMap;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class UserPage {
 	private JFrame userPage;
 	private JLabel label;
-	private JPanel panel;
 	private User user;
 	private ArrayList<Game> games = new ArrayList<Game>();
 	private Moderator mod = new Moderator(1238793263,	"SkyRocket",	"Moderator",	"secretSkyRocketModeratorUserName",	"surreptitiousSkyRocketModeratorPassword", games);
-	public UserPage(User user) {
+	private HashMap<JButton, Game> gameAndButton;
+	public UserPage(User user, ArrayList<Game> games) {
 		this.user = user;
+		this.games = games;
+		
 	}
 	public void displayPage()
 	{
 		userPage = new JFrame(user.getFirstName() + " " + user.getLastName() + "'s Sky Rocket");
 		label = new JLabel("Sky Rocket");
-		panel = new JPanel();
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		label.setFont(new Font("Times New Roman", Font.PLAIN + Font.ITALIC, 38));
 		JButton makeGameRequestButton = new JButton("Game Request");
-		JButton makePostRequestButton =new JButton("Post Request");
+		gameAndButton = new HashMap<JButton, Game>();
+		panel = new JPanel();
+		panel.add(label);
+		panel.add(makeGameRequestButton);
+		JPanel secondaryLayer = new JPanel();
+		JPanel primaryPanel = new JPanel();
+		secondaryLayer.setLayout(new BoxLayout(secondaryLayer, 1));
+		for(Game g: games) {
+			gameAndButton.put(new JButton("Post"), g);
+			JLabel gameLabel = new JLabel(g.getGameName());
+			JButton jb = new JButton("Post");
+			jb.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent m) {
+					JFrame commentFrame =new JFrame("Post Submission Page");
+					JTextArea comment = new JTextArea();
+					JLabel gameLabel = new JLabel(g.getGameName());
+					gameLabel.setFont(new Font("Times New Roman", Font.PLAIN + Font.ITALIC, 38));
+					JLabel postLabel = new JLabel("Post a review about " + g.getGameName());
+					JButton postComment = new JButton("Submit");
+					JPanel postPanel = new JPanel(){
+					    @Override
+					    public Dimension getPreferredSize() {
+					        return new Dimension(400, 400);
+					    };
+					};
+					JLabel companyLabel = new JLabel("Game Company: "+g.getCompany());
+					JLabel versionLabel = new JLabel("Current Available Version: "+g.getVersionNumber());
+					String gameURL = g.getGameHyperLink();
+					JLabel linkLabel = new JLabel("Go to: "+gameURL);
+					linkLabel.setForeground(Color.BLUE);
+					linkLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+					linkLabel.addMouseListener(new MouseAdapter() {
+						@Override
+			            public void mouseClicked(MouseEvent e) {
+			                try {
+			                    Desktop.getDesktop().browse(new URI(gameURL));
+			                } catch (IOException | URISyntaxException e1) {
+			                    e1.printStackTrace();
+			                }
+			            }
+			 
+			            @Override
+			            public void mouseExited(MouseEvent e) {
+			                linkLabel.setText("Visit " + g.getGameName());
+			            }
+			 
+			            @Override
+			            public void mouseEntered(MouseEvent e) {
+			                linkLabel.setText("<html><a href=''>Visit "+ g.getGameName() + "</a></html>");
+			            }
+			 
+					});
+					JLabel systemLabel = new JLabel("Compatible Systems: "+g.getCompatibleSystem());
+					JLabel gameNameLabel = new JLabel(g.getGameName());
+					postPanel.setLayout(null);
+					
+					gameNameLabel.setBounds(700, 290, 400, 15);
+					systemLabel.setBounds(700, 310, 400, 15);
+					companyLabel.setBounds(700, 330, 400, 15);
+					versionLabel.setBounds(700, 350, 400, 15);
+					linkLabel.setBounds(700, 370, 700, 15);
+					
+					comment.setBounds(100, 250, 500, 500);
+					postLabel.setBounds(220, 225, 380, 10);
+					gameLabel.setBounds(200, 25, 400, 100);
+					postComment.setBounds(250, 110, 100, 50);
+					
+					postPanel.add(postLabel);
+					postPanel.add(gameLabel);
+					postPanel.add(postComment);
+					postPanel.add(comment);
+					postPanel.add(companyLabel);
+					postPanel.add(versionLabel);
+					postPanel.add(linkLabel);
+					postPanel.add(systemLabel);
+					postPanel.add(gameNameLabel);
+					commentFrame.add(postPanel);
+					int randomInt = (int)(Math.random()*2147483646);
+					postComment.addMouseListener(new MouseAdapter() {
+						public void mouseClicked(MouseEvent m) {
+							Comment newComment = new Comment(user.getUserId(), g.getGameId(), randomInt, comment.getText());
+						}
+					});
+					commentFrame.setMinimumSize(new Dimension(1400,900));
+					commentFrame.pack();
+					commentFrame.setVisible(true);
+				}
+			});
+			secondaryLayer.add(gameLabel);
+			secondaryLayer.add(jb);
+			primaryPanel.add(panel, BorderLayout.NORTH);
+			primaryPanel.add(secondaryLayer, BorderLayout.CENTER);
+		}
 		makeGameRequestButton.setBounds(400, 330, 190, 30);
 		makeGameRequestButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent m) {
@@ -143,13 +247,11 @@ public class UserPage {
 				requestWindow.setVisible(true);
 			}
 		});
-		panel.add(label);
-		panel.add(makeGameRequestButton);
-		panel.add(makePostRequestButton);
-		userPage.add(panel);
+		userPage.add(primaryPanel);
 		userPage.setMinimumSize(new Dimension(1200,900));
 		userPage.pack();
 		userPage.setVisible(true);
 		
 	}
 }
+
