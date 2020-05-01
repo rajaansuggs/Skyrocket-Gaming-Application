@@ -1,0 +1,102 @@
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+import org.junit.jupiter.api.Test;
+
+class Iteration2tests {
+
+	@Test
+	void UserConstructor1() {
+		ArrayList<User> users = new ArrayList<User>();
+
+		User user = null;
+		assertNull(user);
+		Scanner scanner = null;
+		User user2 = null;
+
+		try {
+			scanner = new Scanner(new File("threeToFiveGames.txt"));
+			scanner.nextLine();
+			while (scanner.hasNextLine()) {
+				user2 = new Game(scanner);
+				users.add(user2);
+			}
+			scanner.close();
+
+		} catch (Exception e) {
+			System.out.println(" " + e.getMessage());
+		} finally {
+
+		}
+
+		assertNotNull(user2);
+		assertEquals(users.get(0).getGameId(), 1);
+		assertEquals(users.get(1).getGameId(), 2);
+	}
+
+	@Test
+	void GameConstructor2() {
+		String[] example = { "1", "a", "description", "5", "www.example.com" };
+
+		Game game = new Game(example);
+		assertNotNull(game);
+		assertEquals(1, game.getGameId());
+		assertEquals(example[1], game.getGameName());
+		assertEquals(example[2], game.getGameDescription());
+		assertEquals(5.0, game.getAverageRating());
+		assertEquals(example[4], game.getGameHyperLink());
+
+	}
+
+	@Test
+	void GameConstructor3() {
+
+		Game game = null;
+		assertNull(game);
+		Game gameA = new Game(1, "a", "description", 5, "www.example.com");
+		assertNotNull(gameA);
+
+		assertEquals(1, gameA.getGameId());
+		assertEquals("a", gameA.getGameName());
+		assertEquals("description", gameA.getGameDescription());
+		assertEquals(5, gameA.getAverageRating());
+		assertEquals("www.example.com", gameA.getGameHyperLink());
+	}
+	
+	@Test
+	void testCanSignIn() {
+		
+	}
+	
+	@Test
+	void testCanLogin() {
+		User u1 = new User(1, "failedFirstName", "failedLastName", "failedUserName", "failedPassword");
+		assertTrue(u1.canLogin());
+	}
+
+	@Test
+	void testSortAlphabetically() {
+		ArrayList<Game> users = new ArrayList<Game>();
+		Game a = new Game(1, "a", "description", 5, "www.example.com");
+		users.add(a);
+		
+		Game b = new Game(1, "c", "description", 5, "www.example.com");
+		users.add(b);
+		
+		Game c = new Game(1, "b", "description", 5, "www.example.com");
+		users.add(c);
+		
+		ArrayList <String> sortedGames = new ArrayList<String>();
+		sortedGames.add("a");
+		sortedGames.add("b");
+		sortedGames.add("c");
+		
+		assertEquals(GraphicalUserInterface.sortAlphabetically(users), sortedGames);
+	}
+
+}
