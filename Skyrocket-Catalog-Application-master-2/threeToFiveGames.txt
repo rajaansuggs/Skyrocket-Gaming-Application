@@ -1,8 +1,0 @@
-id	gameName	gameDescription	gameRating	hyperlink	company	versionNumber	compatibleSystem
-1	Clash Royale	Clash Royale allows for matchups between honorable foe with a diverse deck, three towers and increasingly challenging arenas.	0.86	https://clashroyale.com	Super Cell	version 3.2.2	iOS 9.0 or higher iPhone, iPad, iPod touch
-2	Sims 89	The Sims 89 enables players to create entire families, build their dream homes, open businesses and live out just about any other real-life experience within the fictional Sims universe.	0.70	https://www.thesims3.com	Maxis(Electronic Arts)	version 19.0.1	iOS 9.0 or higher iPhone, iPad, iPod, iPod-mini
-3	Mario Kart	24 new tracks are set for Mario and his friends to become the race car super star.	0.59	https://play.google.com/store/apps/details?id=com.nintendo.zaka&hl=en_US	Nintendo Co.	version 2.0.1	iOS 10.0 or higher iPhone
-4	Uncles Ice Creameria	Uncle needs an extra employee to manage his precious ice creams and thick, creamy smoothies.	0.60	https://www.coolmathgames.com/0-papas-freezeria	Flipline Studios	version 1.0	safari
-5	Brawl Stars	A 3V3 battle of shooting and punching the opposing team to conquer the soccer match.	0.55	https://play.google.com/store/apps/details?id=com.supercell.brawlstars&hl=en_US	Super Cell	version 26.185	iOS 9.0 or higher iPhone, iPad, iPod touch	
-6	Mortal Kombat	A solo battle of customizable and ruthless characters that'll stop at nothing to finish the opponent in a gruesome matchup.	0.89	https://www.mortalkombat.com	Midway Games(Warner Bros. International)	2.50	Android 5.0+	
-2006916786	myGameName	myDescription	0.0	link.com	myCompany	theNewestVersion	Android	
