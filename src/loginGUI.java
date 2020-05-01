@@ -14,6 +14,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map.Entry;
 import java.util.Scanner;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -72,9 +73,10 @@ public class loginGUI extends JFrame implements Serializable{
 							String[]parts = sc.nextLine().split("\t");
 							if((userNameTextField.getText()).equals(parts[3]) && (passwordTextField.getText()).equals(parts[4]))
 							{
-								users.add((new User(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4], games)));
-								usersAndUserPage.get((new User(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4], games))).displayPage();
-							
+								if(new User(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4], games).canLogin(userNameTextField.getText(), passwordTextField.getText(), games)){
+									UserPage up = new UserPage(new User(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4], games), new User(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4], games).getGameList());
+									up.displayPage();
+								}
 							}
 						}
 						sc.close();
@@ -231,7 +233,7 @@ public class loginGUI extends JFrame implements Serializable{
 							int randomInt = (int)(Math.random()*2147483646);
 							UsersCard uc = new UsersCard(randomInt, firstnameTextField.getText(), lastnameTextField.getText(), userNameTextField.getText(), passwordTextField.getText());
 							User uOfficial = new User(randomInt, firstnameTextField.getText(), lastnameTextField.getText(), userNameTextField.getText(), passwordTextField.getText(), games);
-							UserPage up = new UserPage(uOfficial);
+							UserPage up = new UserPage(uOfficial, uOfficial.getGameList());
 							up.displayPage();
 							users.add(uOfficial);
 							usersAndUserPage.put(uOfficial, up);
@@ -314,4 +316,3 @@ public class loginGUI extends JFrame implements Serializable{
 
 
 }
-
