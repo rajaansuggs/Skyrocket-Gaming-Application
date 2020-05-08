@@ -7,10 +7,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JTextArea;
 
-/**
- * @author rajaansuggs
- *
- */
 public class User {
 		//=======================properties
 		private int userId;
