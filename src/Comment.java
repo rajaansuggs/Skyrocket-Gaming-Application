@@ -3,56 +3,64 @@ import java.io.FileWriter;
 
 //Good work! Keep going
 public class Comment {
-	private int commentId, gameId, userId;
-	private String commentString;
-	public Comment(int userId, int commentId, int gameId, String commentString) {
-		setUserId(userId);
+	private int commentId;
+	private String commentString, gameName, userName;
+	public Comment(String userName, int commentId, String gameName, String commentString) {
+		setUserName(userName);
 		setCommentId(commentId);
+		setGameName(gameName);
 		setCommentString(commentString);
-		setGameId(gameId);
-		load(userId, commentId, gameId, commentString);
+		
 	}
 	
-	private void load(int userId, int commentId, int gameId, String commentString) {
+	public void load(String userName, int commentId, String gameName, String commentString) {
 		try {
 			FileWriter saveFile = new FileWriter("commentSection.txt", true);
 			BufferedWriter save = new BufferedWriter(saveFile);
-			save.write(userId + "\t");
+			save.write(userName + "\t");
 			save.write(commentId +"\t");
-			save.write(gameId +"\t");
+			save.write(gameName +"\t");
 			save.write(commentString +"\t");
 			save.newLine();
 			save.close();
 		}
 		catch(Exception e) {
-			
+			e.getMessage();
 		}
 	}
 
-	public int getUserId() {
-		return userId;
+	public String getUserName() {
+		return userName;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	public int getGameId() {
-		return gameId;
+	
+	public String getGameName() {
+		return gameName;
 	}
-	public void setGameId(int gameId) {
-		this.gameId = gameId;
+	
+	public void setGameName(String gameName) {
+		this.gameName = gameName;
 	}
+	
 	public int getCommentId() {
 		return commentId;
 	}
+	
 	public void setCommentId(int commentId) {
 		this.commentId = commentId;
 	}
+	
 	public String getCommentString() {
 		return commentString;
 	}
+	
 	public void setCommentString(String commentString) {
 		this.commentString = commentString;
 	}
 	
 }
+
 
