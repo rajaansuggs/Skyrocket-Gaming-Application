@@ -45,11 +45,9 @@ public class Tester {
 			scanner.nextLine();
 			while(scanner.hasNextLine()) {
 				String line = scanner.nextLine();
-				GameRating rating = new GameRating(line);
+				double rating = (Math.random()*1);
 				for (int i = 0; i < games.size(); i++) {
-					if (games.get(i).getGameId() == rating.getGameId()) {
-						games.get(i).setRating(rating);
-					}
+					games.get(i).setRating(rating);
 				}
 			}
 			scanner.close();
