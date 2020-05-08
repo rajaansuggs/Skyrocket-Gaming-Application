@@ -14,10 +14,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 
 public class GraphicalUserInterface{
-	private JLabel label;
+	private JLabel label, loginLabel, signupLabel;
 	private JFrame window;
 	private JLabel loginButton, signupButton;
 	private Icon loginIcon, signupIcon;
@@ -30,6 +29,7 @@ public class GraphicalUserInterface{
 		//====================================Sign up Page
 		signupIcon = new ImageIcon(getClass().getResource("/resources/icons8-sign-up-64.png"));
 		window.setMinimumSize(new Dimension(1500,700));
+		signupLabel = new JLabel("signup");
 		signupButton = new JLabel(signupIcon); //Label's use addMouseListeners while JButton's addActionLAISTENER
 		signupButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent m) {
@@ -39,6 +39,7 @@ public class GraphicalUserInterface{
 		//====================================Login Page
 		loginIcon = new ImageIcon(getClass().getResource("/resources/icons8-enter-64.png"));
 		loginButton = new JLabel(loginIcon); //Label's use addMouseListeners while JButton's addActionListener
+		loginLabel = new JLabel("login");
 		loginButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent m) {
 				new loginGUI(false, true, false, games);
@@ -47,7 +48,9 @@ public class GraphicalUserInterface{
 		window.setLayout(new FlowLayout(FlowLayout.LEFT));
 		JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		topPanel.add(label);
+		topPanel.add(signupLabel);
 		topPanel.add(signupButton);
+		topPanel.add(loginLabel);
 		topPanel.add(loginButton);
 		JPanel centralPanel = new JPanel();
 		JPanel southPanel = new JPanel();
@@ -146,7 +149,7 @@ public class GraphicalUserInterface{
 						if(searchBar.getText().equalsIgnoreCase("Brawl Stars")){
 							JLabel name = new JLabel("\n"+games.get(4).getGameName());
 							JLabel desc = new JLabel("Description: "+games.get(4).getGameDescription());
-							JLabel rate = new JLabel("Rating: "+games.get(4).getStarRating());
+							JLabel rate = new JLabel("Rating: "+games.get(4).getRating());
 							JLabel company = new JLabel("Company: "+games.get(4).getCompany());
 							JLabel version = new JLabel("Version: "+games.get(4).getVersionNumber());
 							JLabel compatib = new JLabel("Compatibility Systems: "+games.get(4).getCompatibleSystem());
@@ -155,7 +158,7 @@ public class GraphicalUserInterface{
 						else if(searchBar.getText().equalsIgnoreCase("Sims 89")){
 							JLabel name = new JLabel("\n"+games.get(1).getGameName());
 							JLabel desc = new JLabel("Description: "+games.get(1).getGameDescription());
-							JLabel rate = new JLabel("Rating: "+games.get(1).getStarRating());
+							JLabel rate = new JLabel("Rating: "+games.get(1).getRating());
 							JLabel company = new JLabel("Company: "+games.get(1).getCompany());
 							JLabel version = new JLabel("Version: "+games.get(1).getVersionNumber());
 							JLabel compatib = new JLabel("Compatibility Systems: "+games.get(1).getCompatibleSystem());
@@ -164,7 +167,7 @@ public class GraphicalUserInterface{
 						else if(searchBar.getText().equalsIgnoreCase("Mario Kart")){
 							JLabel name = new JLabel("\n"+games.get(2).getGameName());
 							JLabel desc = new JLabel("Description: "+games.get(2).getGameDescription());
-							JLabel rate = new JLabel("Rating: "+games.get(2).getStarRating());
+							JLabel rate = new JLabel("Rating: "+games.get(2).getRating());
 							JLabel company = new JLabel("Company: "+games.get(2).getCompany());
 							JLabel version = new JLabel("Version: "+games.get(2).getVersionNumber());
 							JLabel compatib = new JLabel("Compatibility Systems: "+games.get(2).getCompatibleSystem());
@@ -174,7 +177,7 @@ public class GraphicalUserInterface{
 						else if(searchBar.getText().equalsIgnoreCase("Uncles Ice Creameria")){
 							JLabel name = new JLabel("\n"+games.get(3).getGameName());
 							JLabel desc = new JLabel("Description: "+games.get(3).getGameDescription());
-							JLabel rate = new JLabel("Rating: "+games.get(3).getStarRating());
+							JLabel rate = new JLabel("Rating: "+games.get(3).getRating());
 							JLabel company = new JLabel("Company: "+games.get(3).getCompany());
 							JLabel version = new JLabel("Version: "+games.get(3).getVersionNumber());
 							JLabel compatib = new JLabel("Compatibility Systems: "+games.get(3).getCompatibleSystem());
@@ -183,7 +186,7 @@ public class GraphicalUserInterface{
 						else if(searchBar.getText().equalsIgnoreCase("Mortal Kombat")){
 							JLabel name = new JLabel("\n"+games.get(5).getGameName());
 							JLabel desc = new JLabel("Description: "+games.get(5).getGameDescription());
-							JLabel rate = new JLabel("Rating: "+games.get(5).getStarRating());
+							JLabel rate = new JLabel("Rating: "+games.get(5).getRating());
 							JLabel company = new JLabel("Company: "+games.get(5).getCompany());
 							JLabel version = new JLabel("Version: "+games.get(5).getVersionNumber());
 							JLabel compatib = new JLabel("Compatibility Systems: "+games.get(5).getCompatibleSystem());
@@ -192,7 +195,7 @@ public class GraphicalUserInterface{
 						else if(searchBar.getText().equalsIgnoreCase("Clash Royale")){
 							JLabel name = new JLabel("\n"+games.get(0).getGameName());
 							JLabel desc = new JLabel("Description: "+games.get(0).getGameDescription());
-							JLabel rate = new JLabel("Rating: "+games.get(0).getStarRating());
+							JLabel rate = new JLabel("Rating: "+games.get(0).getRating());
 							JLabel company = new JLabel("Company: "+games.get(0).getCompany());
 							JLabel version = new JLabel("Version: "+games.get(0).getVersionNumber());
 							JLabel compatib = new JLabel("Compatibility Systems: "+games.get(0).getCompatibleSystem());
@@ -216,15 +219,12 @@ public class GraphicalUserInterface{
 		southPanel.add(searchLabel);
 		southPanel.add(searchButton);
 		borderPnl.add(southPanel, BorderLayout.SOUTH);
-		//borderPnl.setBorder((Border) new BorderLayout());
-		//borderPnl.add(searchLabel, BorderLayout.EAST);
-		//borderPnl.add(searchBar, BorderLayout.EAST);
 		//====================================Add to the window/JFrame
 		window.add(borderPnl);
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setTitle("Sky Rocket");
 		window.pack();
-		window.setVisible(true);	
+		window.setVisible(true);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 	}
 	//====================================Public helper for sorting
@@ -239,4 +239,3 @@ public class GraphicalUserInterface{
 	}
 	
 }
-
