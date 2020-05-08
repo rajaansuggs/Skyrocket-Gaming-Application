@@ -14,13 +14,13 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map.Entry;
 import java.util.Scanner;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
@@ -56,12 +56,13 @@ public class loginGUI extends JFrame implements Serializable{
 			userNameTextField.setBounds(155, 135, 389, 20);
 			this.getContentPane().add(userNameTextField);
 			
-			JTextField passwordTextField = new JTextField();
+			JPasswordField passwordTextField = new JPasswordField();
 			passwordTextField.setBounds(155, 175, 389, 20);
 			this.getContentPane().add(passwordTextField);
 			
 			loginButton.addMouseListener(new MouseAdapter() 
 			{
+				
 				public void mouseClicked(MouseEvent m) 
 				{
 					try {
@@ -145,7 +146,7 @@ public class loginGUI extends JFrame implements Serializable{
 			userNameTextField.setBounds(155, 135, 389, 20);
 			this.getContentPane().add(userNameTextField);
 			
-			JTextField passwordTextField = new JTextField();
+			JPasswordField passwordTextField = new JPasswordField();
 			passwordTextField.setBounds(155, 175, 389, 20);
 			this.getContentPane().add(passwordTextField);
 			
@@ -266,7 +267,7 @@ public class loginGUI extends JFrame implements Serializable{
 		panel.setLayout(new GridBagLayout());
 		String s = "Description: "+ g.getGameDescription()+ "    ";
 		JLabel descLabel = new JLabel(s);
-		String rate = "Rating: " + g.getStarRating() + "/5 Stars    ";
+		String rate = "Rating: " + g.getRating() + "/5 Stars    ";
 		JLabel rateLabel = new JLabel(rate);
 		String url = g.getGameHyperLink();
 		JLabel linkLabel = new JLabel(url);
