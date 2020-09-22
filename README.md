@@ -1,5 +1,5 @@
 # Skyrocket-Catalog-Application
-Skyrocket is a social media desktop app that allows users to find details and ratings about mobile application games. Possibly might break it down into genres.
+Skyrocket is a social media desktop app that allows users to chat and find details about mobile application games.
 
 	Our Credits to these companies.
 	Our company is Oxford Gamez. We take no ownership in any of these games. 
